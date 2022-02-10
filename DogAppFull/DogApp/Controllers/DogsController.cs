@@ -8,11 +8,14 @@ using DogApp.Models;
 using DogApp.Domain;
 using DogApp.Abstractions;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DogApp.Controllers
 {
+    [Authorize]
     public class DogsController : Controller
     {
+        
         private readonly IDogService _dogService;
 
         public DogsController(IDogService dogsService)
@@ -111,7 +114,7 @@ namespace DogApp.Controllers
             return this.View();
 
         }
-
+        [AllowAnonymous]
         public IActionResult All(string searchStringBreed, string searchStringName)
         {
 
